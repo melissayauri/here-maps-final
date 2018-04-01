@@ -1,31 +1,67 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-<script src="http://js.api.here.com/v3/3.0/mapsjs-core.js"
-type="text/javascript" charset="utf-8"></script>
-<script src="http://js.api.here.com/v3/3.0/mapsjs-service.js"
-type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.css" />
+<script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-core.js"></script>
+<script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-service.js"></script>
+<script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+<script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+
 </head>
 <body>
-<div style="width: 640px; height: 480px" id="mapContainer"></div>
-<script>
-// Initialize the platform object:
+  <div id="map" style="width: 90%; height: 400px; background: grey; margin-left: 5%;" />
+
+
+
+  <script  type="text/javascript" charset="UTF-8" >
+    
+
+function addMarkersToMap(map) {
+	if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const coords = position.coords;
+                console.log(coords)
+                let lati = coords.latitude;
+                let lngt = coords.longitude
+
+  var myMarker = new H.map.Marker({lat:lati, lng:lngt});
+  map.addObject(myMarker);
+});
+}
+}
+
+/**
+ * Boilerplate map initialization code starts below:
+ */
+
+//Step 1: initialize communication with the platform
 var platform = new H.service.Platform({
-'app_id': 'PCZdnsax7YwwY6RXcyc9',
-'app_code': 'Ds1SPUJpK6iH438tRmW01w'
+  app_id: 'DemoAppId01082013GAL',
+  app_code: 'AJKnXv84fjrb0KIHawS0Tg',
+  useCIT: true,
+  useHTTPS: true
+});
+var defaultLayers = platform.createDefaultLayers();
+
+//Step 2: initialize a map - this map is centered over Europe
+var map = new H.Map(document.getElementById('map'),
+  defaultLayers.normal.map,{
+  center: {lat:50, lng:5},
+  zoom: 1
 });
 
-// Obtain the default map types from the platform object
-var maptypes = platform.createDefaultLayers();
 
-// Instantiate (and display) a map object:
-var map = new H.Map(
-document.getElementById('mapContainer'),
-maptypes.normal.map,
-{
-zoom: 10,
-center: { lng: 13.4, lat: 52.51 }
-});
-</script>
+//Step 3: make the map interactive
+// MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+// Create the default UI components
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+// Now use the map as required...
+addMarkersToMap(map);
+  </script>
 </body>
 </html>
