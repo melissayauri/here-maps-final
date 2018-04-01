@@ -16,7 +16,7 @@
 
   <script  type="text/javascript" charset="UTF-8" >
     
-
+// funcion para añadir un marcador en el mapa con tu ubicacion
 function addMarkersToMap(map) {
 	if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -25,17 +25,15 @@ function addMarkersToMap(map) {
                 let lati = coords.latitude;
                 let lngt = coords.longitude
 
+  map.setCenter({lat:lati, lng:lngt});
+  map.setZoom(14);
   var myMarker = new H.map.Marker({lat:lati, lng:lngt});
   map.addObject(myMarker);
 });
 }
 }
 
-/**
- * Boilerplate map initialization code starts below:
- */
-
-//Step 1: initialize communication with the platform
+//Inicializando el mapa
 var platform = new H.service.Platform({
   app_id: 'DemoAppId01082013GAL',
   app_code: 'AJKnXv84fjrb0KIHawS0Tg',
@@ -44,23 +42,18 @@ var platform = new H.service.Platform({
 });
 var defaultLayers = platform.createDefaultLayers();
 
-//Step 2: initialize a map - this map is centered over Europe
+//dandole valores por default al mapa
 var map = new H.Map(document.getElementById('map'),
   defaultLayers.normal.map,{
   center: {lat:50, lng:5},
   zoom: 1
 });
 
-
-//Step 3: make the map interactive
-// MapEvents enables the event system
-// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+//interacciones
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-
-// Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-// Now use the map as required...
+// usando el mapa con el marcador
 addMarkersToMap(map);
   </script>
 </body>
