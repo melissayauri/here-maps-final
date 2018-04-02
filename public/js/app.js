@@ -45,6 +45,7 @@ alert('holaa2')
 
                 var uno = lati+','+lngt;
 var tipo = 'restaurant'
+var tipo2='coffee-tea'
 
 
 $.ajax({
@@ -52,7 +53,7 @@ $.ajax({
   type: 'GET',
   data: {
     at: uno,
-    q: tipo,
+    q: tipo,tipo2,
     app_id: 'DemoAppId01082013GAL',
   app_code: 'AJKnXv84fjrb0KIHawS0Tg',
   },

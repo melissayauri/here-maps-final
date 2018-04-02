@@ -3,3 +3,36 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  background-color: #eeeeee;
+}
+.nv{
+  background-color: #00afaa;
+
+}
+
+img[alt="logo"]{
+  width: 7vw;
+  height: 7vh;
+  margin-top: 10px;
+}
+
+nav .brand-logo{
+  color: #383b45;
+}
+
+.mapa {
+  border: 1px solid #00afaa;
+  width: 100%;
+  height: 400px;
+  margin-top: 2rem;
+}
+
+form{
+  margin-top: 2rem;
+}
+@media (min-width: 992px){
+  img[alt="logo"]{
+
+  }
+}
