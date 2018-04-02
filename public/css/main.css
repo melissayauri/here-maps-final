@@ -31,8 +31,20 @@ nav .brand-logo{
 form{
   margin-top: 2rem;
 }
+
+.place{
+  margin-left: 8rem;
+  margin-top: 2rem;
+}
+
+.ml{
+  margin-left: 5rem;
+}
 @media (min-width: 992px){
   img[alt="logo"]{
 
+  }
+  .place{
+    margin-left: 35rem;
   }
 }
