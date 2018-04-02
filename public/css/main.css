@@ -35,10 +35,15 @@ form{
 .place{
   margin-left: 8rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .ml{
-  margin-left: 5rem;
+  margin-left: 12rem;
+}
+.direction{
+
+  text-align: left;
 }
 @media (min-width: 992px){
   img[alt="logo"]{
@@ -46,5 +51,8 @@ form{
   }
   .place{
     margin-left: 35rem;
+  }
+  .ml{
+    margin-left: 40rem;
   }
 }

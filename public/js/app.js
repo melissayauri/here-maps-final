@@ -10,7 +10,7 @@ if (navigator.geolocation) {
 
                 var iconOptions = {
                 // The icon's size in pixel:
-                size: new H.math.Size(120, 50),
+                size: new H.math.Size(100, 50),
                 // The anchorage point in pixel,
                 // defaults to bottom-center
                 anchor: new H.math.Point(14, 34)
@@ -64,7 +64,9 @@ $.ajax({
     console.log(data.results.items);
     for (var i = 0; i < data.results.items.length; i++) {
       console.log(data.results.items[i])
-      var div = $('<div>'+ data.results.items[i].title +'<br>'+ data.results.items[i].vicinity+'</div>')
+   var img= data.results.items[i].href;
+      var div = $('<div class="row ext">'+'<div class="col s12">'+'<h4>' +'<i class="material-icons">'+'adjust'+'</i>'+ data.results.items[i].title+  '</h4>'+ '<span class="direction">'+ data.results.items[i].vicinity +'</span>'+'</div>'+'</div>'+'</div>'
+        )
       $('#places').append(div);
     }
   }
