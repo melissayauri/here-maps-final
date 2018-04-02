@@ -5,15 +5,27 @@ if (navigator.geolocation) {
                 let lati = coords.latitude;
                 let lngt = coords.longitude
 
- 
 
+                var iconUrl = 'descarga.png';
+
+                var iconOptions = {
+                // The icon's size in pixel:
+                size: new H.math.Size(80, 34),
+                // The anchorage point in pixel,
+                // defaults to bottom-center
+                anchor: new H.math.Point(14, 34)
+                };
+
+                var markerOptions = {
+                icon: new H.map.Icon(iconUrl, iconOptions)
+                };
 
 
 // funcion para añadir un marcador en el mapa con tu ubicacion
 function addMarkersToMap(map) {
  map.setCenter({lat:lati, lng:lngt});
   map.setZoom(14);
-  var myMarker = new H.map.Marker({lat:lati, lng:lngt});
+  var myMarker = new H.map.Marker({lat:lati, lng:lngt},markerOptions);
   map.addObject(myMarker);
 }
 
@@ -75,7 +87,7 @@ function calculateRouteFromAtoB (platform) {
     routeRequestParams = {
       mode: 'fastest;car',
       representation: 'display',
-      routeattributes : 'waypoints,summary,shape,legs', 
+      routeattributes : 'waypoints,summary,shape,legs',
       maneuverattributes: 'direction,action',
       waypoint0: poin1, // punto 1
       waypoint1: poin2  // punto 2
@@ -93,7 +105,7 @@ function calculateRouteFromAtoB (platform) {
 function onSuccess(result) {
   var route = result.response.route[0];
   addRouteShapeToMap(route);
-  
+
 }
 
 function onError(error) {
