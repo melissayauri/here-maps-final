@@ -1,18 +1,20 @@
-// funcion para añadir un marcador en el mapa con tu ubicacion
-function addMarkersToMap(map) {
-	if (navigator.geolocation) {
+if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const coords = position.coords;
                 console.log(coords)
                 let lati = coords.latitude;
                 let lngt = coords.longitude
 
-  map.setCenter({lat:lati, lng:lngt});
+ 
+
+
+
+// funcion para añadir un marcador en el mapa con tu ubicacion
+function addMarkersToMap(map) {
+ map.setCenter({lat:lati, lng:lngt});
   map.setZoom(14);
   var myMarker = new H.map.Marker({lat:lati, lng:lngt});
   map.addObject(myMarker);
-});
-}
 }
 
 
@@ -26,15 +28,57 @@ calculateRouteFromAtoB(platform);
 
 })
 
+$('#btn2').on('click', function(event) {
+alert('holaa2')
+
+                var uno = lati+','+lngt;
+var tipo = 'restaurant'
+
+
+$.ajax({
+  url: 'https://places.demo.api.here.com/places/v1/discover/search',
+  type: 'GET',
+  data: {
+    at: uno,
+    q: tipo,
+    app_id: 'DemoAppId01082013GAL',
+  app_code: 'AJKnXv84fjrb0KIHawS0Tg',
+  },
+  beforeSend: function(xhr){
+    xhr.setRequestHeader('Accept', 'application/json');
+  },
+  success: function (data) {
+    console.log(data.results.items);
+    for (var i = 0; i < data.results.items.length; i++) {
+      console.log(data.results.items[i])
+      var div = $('<div>'+ data.results.items[i].title +'<br>'+ data.results.items[i].vicinity+'</div>')
+      $('#places').append(div);
+    }
+  }
+});
+
+
+})
+
+
+
+
+
 function calculateRouteFromAtoB (platform) {
+
+
+
+  var poin1 = '52.5160,13.3779';
+  var poin2 = '52.5206,13.3862';
+
   var router = platform.getRoutingService(),
     routeRequestParams = {
       mode: 'fastest;car',
       representation: 'display',
       routeattributes : 'waypoints,summary,shape,legs', 
       maneuverattributes: 'direction,action',
-      waypoint0: '52.5160,13.3779', // punto 1
-      waypoint1: '52.5206,13.3862'  // punto 2
+      waypoint0: poin1, // punto 1
+      waypoint1: poin2  // punto 2
     };
 
 
@@ -84,11 +128,6 @@ function addRouteShapeToMap(route){
 
 
 
-
-
-
-
-
 //Inicializando el mapa
 var platform = new H.service.Platform({
   app_id: 'DemoAppId01082013GAL',
@@ -111,3 +150,6 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 // usando el mapa con el marcador
 addMarkersToMap(map);
+
+});
+}
