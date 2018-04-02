@@ -5,12 +5,12 @@ if (navigator.geolocation) {
                 let lati = coords.latitude;
                 let lngt = coords.longitude
 
-
-                var iconUrl = 'descarga.png';
+/* marcador personalizado*/
+                var iconUrl = 'turist.png';
 
                 var iconOptions = {
                 // The icon's size in pixel:
-                size: new H.math.Size(80, 34),
+                size: new H.math.Size(120, 50),
                 // The anchorage point in pixel,
                 // defaults to bottom-center
                 anchor: new H.math.Point(14, 34)
