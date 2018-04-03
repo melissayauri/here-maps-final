@@ -26,6 +26,7 @@ nav .brand-logo{
   width: 100%;
   height: 400px;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 form{
@@ -44,6 +45,16 @@ form{
 .direction{
 
   text-align: left;
+}
+
+.card .card-image img{
+
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
+
 }
 @media (min-width: 992px){
   img[alt="logo"]{

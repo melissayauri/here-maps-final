@@ -5,7 +5,20 @@ if (navigator.geolocation) {
                 let lati = coords.latitude;
                 let lngt = coords.longitude
 
- 
+
+                var iconUrl = 'turist1.png';
+
+                var iconOptions = {
+                // The icon's size in pixel:
+                size: new H.math.Size(80, 70),
+                // The anchorage point in pixel,
+                // defaults to bottom-center
+                anchor: new H.math.Point(14, 34)
+                };
+
+                var markerOptions = {
+                icon: new H.map.Icon(iconUrl, iconOptions)
+                };
 
 
 
@@ -13,7 +26,7 @@ if (navigator.geolocation) {
 function addMarkersToMap(map) {
  map.setCenter({lat:lati, lng:lngt});
   map.setZoom(14);
-  var myMarker = new H.map.Marker({lat:lati, lng:lngt});
+  var myMarker = new H.map.Marker({lat:lati, lng:lngt},markerOptions);
   map.addObject(myMarker);
 }
 
@@ -47,8 +60,26 @@ $.ajax({
   success: function (data) {
     console.log(data.results.items);
     for (var i = 0; i < data.results.items.length; i++) {
+      let title = data.results.items[i].title;
+      let img = data.results.items[i].icon;
+      let direction = data.results.items[i].vicinity;
       console.log(data.results.items[i])
-      var div = $('<div>'+ data.results.items[i].title +'<br>'+ data.results.items[i].vicinity+'</div>')
+      var div = `
+                  <div class="col s4 ">
+                   <div class="card ">
+                  <div class="card-image">
+                      <img class="img" src=${img}>
+
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title">${title}</span>
+                      <p>${direction}</p>
+                  
+                    </div>
+      </div>
+            </div>
+      `
+
       $('#places').append(div);
     }
   }
@@ -90,7 +121,7 @@ $.ajax({
     routeRequestParams = {
       mode: 'fastest;car',
       representation: 'display',
-      routeattributes : 'waypoints,summary,shape,legs', 
+      routeattributes : 'waypoints,summary,shape,legs',
       maneuverattributes: 'direction,action',
       waypoint0: poin1, // punto 1
       waypoint1: poin2  // punto 2
@@ -106,14 +137,14 @@ $.ajax({
 });
 
 
-  
+
 }
 
 
 function onSuccess(result) {
   var route = result.response.route[0];
   addRouteShapeToMap(route);
-  
+
 }
 
 function onError(error) {
