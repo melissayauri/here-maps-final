@@ -20,11 +20,11 @@
 
    ![Inicio](public/assets/img/principal3.PNG)
 
-   ![Inicio](public/assets/img/principal4.PNG)
+   ![Inicio](public/assets/img/principal4.png)
 
 4. Y también en la sección buscar, el usuario puede encontrar lugares cercanos como resturantes, hoteles, etc. En ello el usuario encuentra información como el nombre del resturant y la dirección.
 
-   ![Inicio](public/assets/img/principal5.PNG)
+   ![Inicio](public/assets/img/principal5.png)
 
 ## Herramientas utilizadas:
   - HTML5
@@ -36,4 +36,4 @@
 ## Recursos
 
   * [Here-maps](https://developer.here.com/documentation)
-  * [Materialize](http://materializecss.com/) 
+  * [Materialize](http://materializecss.com/)
