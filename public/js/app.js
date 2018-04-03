@@ -57,11 +57,8 @@ if (navigator.geolocation) {
             console.log(data.results.items[i]);
             var div = `<div class="col s4 ">
                          <div class="card ">
-                           <div class="card-image">
-                             <img class="img" src=${img}>
-                          </div>
                           <div class="card-content">
-                            <span class="card-title">${title}</span>
+                            <span class="card-title"><img class="img" src=${img}>${title}</span>
                             <p>${direction}</p>
                           </div>
                         </div>
@@ -152,6 +149,8 @@ if (navigator.geolocation) {
           lng: 5},
         zoom: 1
       });
+
+
       /* Interacciones*/
     var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
     var ui = H.ui.UI.createDefault(map, defaultLayers);
