@@ -24,7 +24,7 @@
       </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="">otros</a></li>
+        <li><a href="" id="sesion">Iniciar Sesión</a></li>
       </ul>
     </div>
     <!--Tabs-->
@@ -38,7 +38,7 @@
     </div>
   </nav>
   <ul class="sidenav" id="mobile-demo">
-    <li><a href="sass.html">otros</a></li>
+    <li><a href="">Iniciar Sesión</a></li>
   </ul>
 
   <!-- Contenedores de Tabs-->
@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-    
+
     <!--Sección buscar-->
     <div id="test2" class="col s12">
       <h3 class="center-align gray-text text-darken-4 ">Encuentra lugares nuevos cerca de ti</h3>
@@ -90,7 +90,19 @@
   <script  type="text/javascript" charset="UTF-8" src="js/app.js" ></script>
   <!--Enlazando archivo de inicialización de materialize-->
   <script  type="text/javascript" charset="UTF-8" src="js/init.js" ></script>
-
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC6XOQIBeUN26oFZnptpphNok8wlyUGDPE",
+    authDomain: "here-maps-6c0b1.firebaseapp.com",
+    databaseURL: "https://here-maps-6c0b1.firebaseio.com",
+    projectId: "here-maps-6c0b1",
+    storageBucket: "",
+    messagingSenderId: "865132521358"
+  };
+  firebase.initializeApp(config);
+</script>
 
 </body>
 </html>
