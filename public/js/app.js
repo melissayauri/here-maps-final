@@ -5,55 +5,39 @@ if (navigator.geolocation) {
                 let lati = coords.latitude;
                 let lngt = coords.longitude
 
-/* marcador personalizado*/
-                var iconUrl = 'turist.png';
+ 
 
-                var iconOptions = {
-                // The icon's size in pixel:
-                size: new H.math.Size(100, 50),
-                // The anchorage point in pixel,
-                // defaults to bottom-center
-                anchor: new H.math.Point(14, 34)
-                };
-
-                var markerOptions = {
-                icon: new H.map.Icon(iconUrl, iconOptions)
-                };
 
 
 // funcion para añadir un marcador en el mapa con tu ubicacion
 function addMarkersToMap(map) {
  map.setCenter({lat:lati, lng:lngt});
   map.setZoom(14);
-  var myMarker = new H.map.Marker({lat:lati, lng:lngt},markerOptions);
+  var myMarker = new H.map.Marker({lat:lati, lng:lngt});
   map.addObject(myMarker);
 }
 
 
 
-
-
 $('#btn').on('click', function(event) {
-alert('holaa')
 //lamando a la funcion que mostrara la ruta en el mapa
 calculateRouteFromAtoB(platform);
 
 })
 
 $('#btn2').on('click', function(event) {
-alert('holaa2')
+//alert('holaa2')
 
-                var uno = lati+','+lngt;
+
+var uno = lati+','+lngt;
 var tipo = 'restaurant'
-var tipo2='coffee-tea'
-
 
 $.ajax({
   url: 'https://places.demo.api.here.com/places/v1/discover/search',
   type: 'GET',
   data: {
     at: uno,
-    q: tipo,tipo2,
+    q: tipo,
     app_id: 'DemoAppId01082013GAL',
   app_code: 'AJKnXv84fjrb0KIHawS0Tg',
   },
@@ -64,9 +48,7 @@ $.ajax({
     console.log(data.results.items);
     for (var i = 0; i < data.results.items.length; i++) {
       console.log(data.results.items[i])
-   var img= data.results.items[i].href;
-      var div = $('<div class="row ext">'+'<div class="col s12">'+'<h4>' +'<i class="material-icons">'+'adjust'+'</i>'+ data.results.items[i].title+  '</h4>'+ '<span class="direction">'+ data.results.items[i].vicinity +'</span>'+'</div>'+'</div>'+'</div>'
-        )
+      var div = $('<div>'+ data.results.items[i].title +'<br>'+ data.results.items[i].vicinity+'</div>')
       $('#places').append(div);
     }
   }
@@ -80,17 +62,35 @@ $.ajax({
 
 
 function calculateRouteFromAtoB (platform) {
+var destino = $('#icon_telephone').val()
+$.ajax({
+  url: 'https://geocoder.cit.api.here.com/6.2/geocode.json',
+  type: 'GET',
+  dataType: 'jsonp',
+  jsonp: 'jsoncallback',
+  data: {
+    searchtext: destino,
+    app_id: 'PCZdnsax7YwwY6RXcyc9',
+    app_code: 'Ds1SPUJpK6iH438tRmW01w',
+    gen: '8'
+  },
+  success: function (data) {
+    var latiDestiny = data.Response.View[0].Result[0].Location.DisplayPosition.Latitude;
+    var longDestiny = data.Response.View[0].Result[0].Location.DisplayPosition.Longitude;
+    var destinoCoord = latiDestiny+','+longDestiny
+    console.log(destinoCoord)
 
 
-
-  var poin1 = '52.5160,13.3779';
-  var poin2 = '52.5206,13.3862';
+    var uno = lati+','+lngt;
+  console.log(uno)
+  var poin1 = lati+','+lngt;
+  var poin2 = destinoCoord;
 
   var router = platform.getRoutingService(),
     routeRequestParams = {
       mode: 'fastest;car',
       representation: 'display',
-      routeattributes : 'waypoints,summary,shape,legs',
+      routeattributes : 'waypoints,summary,shape,legs', 
       maneuverattributes: 'direction,action',
       waypoint0: poin1, // punto 1
       waypoint1: poin2  // punto 2
@@ -102,13 +102,18 @@ function calculateRouteFromAtoB (platform) {
     onSuccess,
     onError
   );
+  }
+});
+
+
+  
 }
 
 
 function onSuccess(result) {
   var route = result.response.route[0];
   addRouteShapeToMap(route);
-
+  
 }
 
 function onError(error) {
