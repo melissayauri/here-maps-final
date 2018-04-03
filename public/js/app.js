@@ -14,6 +14,45 @@ if (navigator.geolocation) {
     var markerOptions = {
       icon: new H.map.Icon(iconUrl, iconOptions)
     };
+
+    function reverseUbication() {
+      var myUbicacion = lati + ',' + lngt;
+      console.log(myUbicacion)
+      $.ajax({
+  url: 'https://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json',
+  type: 'GET',
+  dataType: 'jsonp',
+  jsonp: 'jsoncallback',
+  data: {
+    prox: '-12.1455001,-77.0223239',
+    mode: 'retrieveAddresses',
+    maxresults: '1',
+    gen: '8',
+    app_id: 'PCZdnsax7YwwY6RXcyc9',
+    app_code: 'Ds1SPUJpK6iH438tRmW01w'
+  },
+  success: function (data) {
+    var myAdreesReverse = data.Response.View[0].Result[0].Location.Address.Label;
+    $('#icon_prefix').val(myAdreesReverse);
+    console.log(data.Response.View[0].Result[0].Location.Address.Label);
+  }
+});
+
+    }
+
+    reverseUbication();
+
+
+
+
+
+
+
+
+
+
+
+
     /* Función para añadir un marcador en el mapa con tu ubicacion*/
     function addMarkersToMap(map) {
       map.setCenter({
