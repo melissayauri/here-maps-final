@@ -1,5 +1,5 @@
 # Here Maps
-  Plataforma que permite a los usuarios trazar recorridos al destino que el usuario lo solicite.Asimismo la plataforma está orientada a los amantes de las actividades de aventura (montañas, lagos, parques, etc.) en Perú.
+  Plataforma que permite trazar rutas al destino que el usuario solicite. Asimismo la plataforma está orientada a los amantes de las actividades al aire libre en Perú.
 
   ![Inicio](public/assets/img/layaout.png)
 
